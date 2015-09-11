@@ -1,0 +1,24 @@
+{
+  "name": "bernie-calendar",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-less": "^3.0.3",
+    "gulp-uglify": "^1.4.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:SandersForPresident/bernie-calendar.git"
+  },
+  "author": "Atticus White <contact@atticuswhite.com> (http://atticuswhite.com/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SandersForPresident/bernie-calendar/issues"
+  },
+  "homepage": "https://github.com/SandersForPresident/bernie-calendar"
+}
