@@ -1,0 +1,12 @@
+{
+  "name": "bernie-calendar",
+  "version": "1.0.0",
+  "authors": [
+    "Atticus White <contact@atticuswhite.com>"
+  ],
+  "description": "jQuery calendar plugin for Bernie Sanders events",
+  "license": "MIT",
+  "dependencies": {
+    "jquery": "~2.1.4"
+  }
+}
