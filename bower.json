@@ -5,7 +5,7 @@
     "Atticus White <contact@atticuswhite.com>"
   ],
   "description": "jQuery calendar plugin for Bernie Sanders events",
-  "license": "MIT",
+  "license": "GNUA",
   "dependencies": {
     "jquery": "~2.1.4",
     "fullcalendar": "~2.4.0",
@@ -15,8 +15,7 @@
     "*",
     "**/.*",
     "!/dist/**",
-    "!/changelog.*",
-    "!/license.*",
-    "!/readme.*"
+    "!/LICENSE.*",
+    "!/README.*"
   ]
 }
