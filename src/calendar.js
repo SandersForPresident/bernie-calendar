@@ -54,6 +54,7 @@
           callback(events);
         });
       };
+      $(this).addClass('bernie-calendar');
       $(this).fullCalendar(settings.fullCalendar);
     });
   };
