@@ -15,10 +15,13 @@
 
   function getEvents () {
     if (!deferred) {
+      // if there has not yet been a request for the events, create the deferred object
       deferred = $.Deferred();
     } else {
+      // if a request has already been made for the events, return the promise
       return deferred.promise();
     }
+    // request the events
     $.ajax({
       url: EVENT_ENDPOINT,
       dataType: 'script',
@@ -30,9 +33,11 @@
             date: event.start_day
           };
         });
+        // resolve the events
         deferred.resolve(events);
       }
     });
+    // return the promise for the first caller
     return deferred.promise();
   }
 
@@ -40,8 +45,12 @@
     return this.each(function () {
       // initialize the calendar
       var settings = $.extend({}, DEFAULT_OPTIONS, options);
+
+      // define the asynchronous events source for the calendar
       settings.fullCalendar.events = function (start, end, timezone, callback) {
+        // fetch the events and wait for the resolve
         getEvents().then(function (events) {
+          // reduce the collection into a map of events grouped by by date of `maxEvents` length
           events = _.chain(events).reduce(function (reduction, event) {
             if (!(event.date in reduction)) {
               reduction[event.date] = [event];
@@ -49,12 +58,19 @@
               reduction[event.date].push(event);
             }
             return reduction;
-          },{});
-          events = events.values().flatten().value();
+          },{})
+          .values()
+          .flatten()
+          .value();
+
+          // send the eents back to the calendar
           callback(events);
         });
       };
+
+      // the CSS class for the calendar
       $(this).addClass('bernie-calendar');
+      // wire up the calendar
       $(this).fullCalendar(settings.fullCalendar);
     });
   };
