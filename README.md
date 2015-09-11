@@ -30,6 +30,17 @@ $(document).ready(function () {
 </script>
 ```
 
+## Options
+```js
+{
+  maxEvents: Integer
+}
+```
+#### options.maxEvents
+The maximum number of events to display on a given calendar day
+
+*note: more options coming soon*
+
 ## To build
 
 #### Install the dependencies
