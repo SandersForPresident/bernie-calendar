@@ -15,9 +15,9 @@
 
   function getEvents () {
     if (!deferred) {
-      deferred = Q.defer();
+      deferred = $.Deferred();
     } else {
-      return deferred.promise;
+      return deferred.promise();
     }
     $.ajax({
       url: EVENT_ENDPOINT,
@@ -33,29 +33,28 @@
         deferred.resolve(events);
       }
     });
-    return deferred.promise;
+    return deferred.promise();
   }
 
   $.fn.bernieCalendar = function (options) {
-    var settings = $.extend({}, DEFAULT_OPTIONS, options);
     return this.each(function () {
       // initialize the calendar
+      var settings = $.extend({}, DEFAULT_OPTIONS, options);
+      settings.fullCalendar.events = function (start, end, timezone, callback) {
+        getEvents().then(function (events) {
+          events = _.chain(events).reduce(function (reduction, event) {
+            if (!(event.date in reduction)) {
+              reduction[event.date] = [event];
+            } else if (reduction[event.date].length < settings.maxEvents) {
+              reduction[event.date].push(event);
+            }
+            return reduction;
+          },{});
+          events = events.values().flatten().value();
+          callback(events);
+        });
+      };
       $(this).fullCalendar(settings.fullCalendar);
-
-      // async & await the events to load
-      getEvents().then(function (events) {
-        // fetch and group the events by date, reduce to the number of allowed events
-        events = _.chain(events).reduce(function (reduction, event) {
-          if (!(event.date in reduction)) {
-            reduction[event.date] = [event];
-          } else if (reduction[event.date] < settings.maxEvents) {
-            reduction[event.date].push(event);
-          }
-          return reduction;
-        },{}).values().flatten().value();
-        // add the events to the calendar
-        $(this).fullCalendar('events', events);
-      });
     });
   };
 })(jQuery);

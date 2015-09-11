@@ -9,7 +9,14 @@
   "dependencies": {
     "jquery": "~2.1.4",
     "fullcalendar": "~2.4.0",
-    "q": "~2.0.2",
     "lodash": "~3.10.1"
-  }
+  },
+  "ignore": [
+    "*",
+    "**/.*",
+    "!/dist/**",
+    "!/changelog.*",
+    "!/license.*",
+    "!/readme.*"
+  ]
 }
